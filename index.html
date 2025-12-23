@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel Asset Management | Engineering Strategy. Powered by AI.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-serif {
+            font-family: 'Merriweather', serif;
+        }
+        .glassmorphic {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .gradient-blue {
+            background: linear-gradient(135deg, #0f4c81 0%, #38bdf8 100%);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #0f4c81 0%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(15, 76, 129, 0.95) 0%, rgba(15, 23, 42, 0.9) 100%);
+        }
+        .scanline {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to bottom, transparent, #38bdf8, transparent);
+            box-shadow: 0 0 10px #38bdf8;
+            animation: scan 3s ease-in-out infinite;
+        }
+        @keyframes scan {
+            0% { top: 0; }
+            50% { top: 100%; }
+            100% { top: 0; }
+        }
+        .bounding-box {
+            position: absolute;
+            border: 2px solid #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .confidence-badge {
+            position: absolute;
+            background: #38bdf8;
+            color: #0f172a;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            top: -25px;
+            left: 0;
+        }
+        .typing::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        .carbon-fiber {
+            background-image: 
+                repeating-linear-gradient(0deg, rgba(0,0,0,.2) 0px, transparent 1px, transparent 2px, rgba(0,0,0,.2) 3px),
+                repeating-linear-gradient(90deg, rgba(0,0,0,.2) 0px, transparent 1px, transparent 2px, rgba(0,0,0,.2) 3px);
+            background-size: 3px 3px;
+        }
+        .progress-bar {
+            transition: width 1s ease-out;
+        }
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-900">
+    <!-- Top Bar -->
+    <div class="bg-slate-950 text-white py-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center text-sm">
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                    </svg>
+                    <span class="font-semibold">1300 SENTINEL</span>
+                </div>
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>contact@sentinelasset.com.au</span>
+                </div>
+            </div>
+            <button class="flex items-center hover:text-sky-400 transition-colors">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                </svg>
+                Client Portal Login
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glassmorphic border-b border-slate-200" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-gradient">SENTINEL</span>
+                    <span class="ml-2 text-sm text-slate-600">Asset Management</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#advisory" class="text-slate-700 hover:text-sky-600 font-medium transition-colors">Advisory</a>
+                    <a href="#methodology" class="text-slate-700 hover:text-sky-600 font-medium transition-colors">Methodology</a>
+                    <a href="#compliance" class="text-slate-700 hover:text-sky-600 font-medium transition-colors">Compliance</a>
+                    <a href="#engineering" class="text-slate-700 hover:text-sky-600 font-medium transition-colors">Engineering</a>
+                    <a href="#digital" class="text-slate-700 hover:text-sky-600 font-medium transition-colors">Digital & AI</a>
+                </div>
+                <button class="gradient-blue text-white px-6 py-2 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image Placeholder -->
+        <div class="absolute inset-0 z-0">
+            <svg class="w-full h-full" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="1920" height="1080" fill="#0f172a"/>
+                <g opacity="0.1">
+                    <line x1="0" y1="200" x2="1920" y2="200" stroke="#38bdf8" stroke-width="1"/>
+                    <line x1="0" y1="400" x2="1920" y2="400" stroke="#38bdf8" stroke-width="1"/>
+                    <line x1="0" y1="600" x2="1920" y2="600" stroke="#38bdf8" stroke-width="1"/>
+                    <line x1="0" y1="800" x2="1920" y2="800" stroke="#38bdf8" stroke-width="1"/>
+                    <line x1="400" y1="0" x2="400" y2="1080" stroke="#38bdf8" stroke-width="1"/>
+                    <line x1="800" y1="0" x2="800" y2="1080" stroke="#38bdf8" stroke-width="1"/>
+                    <line x1="1200" y1="0" x2="1200" y2="1080" stroke="#38bdf8" stroke-width="1"/>
+                    <line x1="1600" y1="0" x2="1600" y2="1080" stroke="#38bdf8" stroke-width="1"/>
+                </g>
+            </svg>
+        </div>
+        <div class="absolute inset-0 hero-overlay z-10"></div>
+        
+        <!-- Hero Content -->
+        <div class="relative z-20 text-center px-4 max-w-5xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 font-serif">
+                Engineering Strategy.<br>
+                <span class="text-sky-400">Powered by AI.</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto">
+                Bridging physical engineering excellence with digital intelligence. ISO 55000 aligned strategic asset management, delivered through cutting-edge technology.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-sky-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-sky-600 transition-colors">
+                    Schedule Consultation
+                </button>
+                <button class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-slate-900 transition-colors">
+                    View Case Studies
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Strip -->
+        <div class="absolute bottom-0 left-0 right-0 z-20 bg-slate-900/80 backdrop-blur-md border-t border-slate-700">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="text-3xl font-bold text-sky-400">$2.4B+</div>
+                        <div class="text-slate-300 text-sm mt-1">Assets Managed</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-sky-400">100%</div>
+                        <div class="text-slate-300 text-sm mt-1">Compliance Rate</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-sky-400">15+</div>
+                        <div class="text-slate-300 text-sm mt-1">Years Experience</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-sky-400">50+</div>
+                        <div class="text-slate-300 text-sm mt-1">Client Partners</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section id="advisory" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4 font-serif">Three Pillars of Excellence</h2>
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto">Comprehensive asset management solutions from strategic planning to digital transformation</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Strategic Advisory -->
+                <div class="bg-gradient-to-br from-slate-50 to-white p-8 rounded-2xl border border-slate-200 hover:shadow-2xl transition-all duration-300 group">
+                    <div class="w-16 h-16 gradient-blue rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">Strategic Advisory</h3>
+                    <p class="text-slate-600 mb-6">ISO 55000 aligned strategic asset management planning (SAMP) development, lifecycle optimization, and investment modeling.</p>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-sky-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Strategic Asset Management Plans</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-sky-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Lifecycle Cost Analysis</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-sky-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Risk & Performance Frameworks</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Capital Works -->
+                <div class="bg-gradient-to-br from-slate-50 to-white p-8 rounded-2xl border border-slate-200 hover:shadow-2xl transition-all duration-300 group">
+                    <div class="w-16 h-16 gradient-blue rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">Capital Works & Projects</h3>
+                    <p class="text-slate-600 mb-6">End-to-end capital project delivery from scope definition through commissioning, with full transparency and control.</p>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-sky-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Project Scoping & Business Cases</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-sky-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Procurement & Delivery</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-sky-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Commissioning & Close-out</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Digital Twin & AI -->
+                <div class="bg-gradient-to-br from-slate-50 to-white p-8 rounded-2xl border border-slate-200 hover:shadow-2xl transition-all duration-300 group">
+                    <div class="w-16 h-16 gradient-blue rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">Digital Twin & AI</h3>
+                    <p class="text-slate-600 mb-6">AI-powered visual asset registers through Matterport integration and computer vision, creating living digital twins.</p>
+                    <ul class="space-y-3 text-slate-700">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-sky-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Matterport Digital Twins</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-sky-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>AI Object Detection & Annotation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-sky-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Visual Asset Registers</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategic Asset Management Deep Dive -->
+    <section id="methodology" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4 font-serif">Total Asset Management</h2>
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto">Proprietary methodologies grounded in engineering rigour and data-driven decision making</p>
+            </div>
+
+            <!-- Methodology Grid -->
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <!-- Risk-Based Priority -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="text-sky-600 font-bold text-sm uppercase tracking-wide mb-4">Methodology 01</div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">Risk-Based Priority</h3>
+                    <p class="text-slate-600 mb-6">Systematic prioritization using dual-axis criticality assessment</p>
+                    <div class="bg-slate-900 text-white p-6 rounded-lg font-mono text-center">
+                        <div class="text-sm text-slate-400 mb-2">Risk Formula</div>
+                        <div class="text-xl font-bold">Risk = Asset Criticality × Task Criticality</div>
+                    </div>
+                    <div class="mt-6 space-y-2 text-sm text-slate-700">
+                        <div class="flex justify-between">
+                            <span>Asset Criticality:</span>
+                            <span class="font-semibold">1-5 Scale</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Task Criticality:</span>
+                            <span class="font-semibold">1-5 Scale</span>
+                        </div>
+                        <div class="flex justify-between border-t border-slate-200 pt-2">
+                            <span>Risk Score Range:</span>
+                            <span class="font-semibold text-sky-600">1-25</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proactive Ratios -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="text-sky-600 font-bold text-sm uppercase tracking-wide mb-4">Methodology 02</div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">Proactive Ratios</h3>
+                    <p class="text-slate-600 mb-6">Shift from reactive breakdowns to planned preventive maintenance</p>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2 text-sm">
+                                <span class="font-semibold text-slate-700">Preventive Maintenance</span>
+                                <span class="font-bold text-green-600">75%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-3">
+                                <div class="bg-green-500 h-3 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2 text-sm">
+                                <span class="font-semibold text-slate-700">Breakdown Work</span>
+                                <span class="font-bold text-orange-600">25%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-3">
+                                <div class="bg-orange-500 h-3 rounded-full" style="width: 25%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 bg-sky-50 p-4 rounded-lg">
+                        <div class="text-sm text-slate-600">Target Ratio</div>
+                        <div class="text-2xl font-bold text-sky-600">PM > 70%</div>
+                    </div>
+                </div>
+
+                <!-- Capital Interleave -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="text-sky-600 font-bold text-sm uppercase tracking-wide mb-4">Methodology 03</div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-4">Capital Interleave</h3>
+                    <p class="text-slate-600 mb-6">Strategic capital expenditure to reset operational cost curves</p>
+                    <div class="relative h-48 bg-slate-100 rounded-lg p-4">
+                        <svg viewBox="0 0 300 150" class="w-full h-full">
+                            <!-- OpEx curve (exponential) -->
+                            <path d="M 10 130 Q 50 120, 90 105 T 170 60 T 250 10" stroke="#ef4444" stroke-width="3" fill="none" stroke-dasharray="5,5"/>
+                            <!-- CapEx intervention point -->
+                            <line x1="150" y1="10" x2="150" y2="140" stroke="#0f4c81" stroke-width="2"/>
+                            <circle cx="150" cy="75" r="5" fill="#0f4c81"/>
+                            <!-- Reset OpEx curve -->
+                            <path d="M 150 75 Q 180 72, 210 65 T 270 40" stroke="#22c55e" stroke-width="3" fill="none"/>
+                            <!-- Labels -->
+                            <text x="50" y="50" font-size="10" fill="#ef4444">Rising OpEx</text>
+                            <text x="160" y="70" font-size="10" fill="#0f4c81">CapEx</text>
+                            <text x="200" y="100" font-size="10" fill="#22c55e">Reset OpEx</text>
+                        </svg>
+                    </div>
+                    <div class="mt-4 text-sm text-slate-700">
+                        <p>Strategic capital investment resets the operational cost trajectory, avoiding exponential maintenance spend.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plan Outputs -->
+            <div class="bg-slate-900 rounded-2xl p-8 md:p-12 text-white">
+                <h3 class="text-3xl font-bold mb-8 text-center">Plan Outputs</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-xl font-semibold text-sky-400 mb-4">Cost Distribution Analysis</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span>Preventive Maintenance</span>
+                                <span class="font-bold">42%</span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-sky-400 h-2 rounded-full" style="width: 42%"></div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Corrective Maintenance</span>
+                                <span class="font-bold">28%</span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-sky-400 h-2 rounded-full" style="width: 28%"></div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Capital Renewal</span>
+                                <span class="font-bold">30%</span>
+                            </div>
+                            <div class="w-full bg-slate-700 rounded-full h-2">
+                                <div class="bg-sky-400 h-2 rounded-full" style="width: 30%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-sky-400 mb-4">Expenditure Efficiency</h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-slate-800 p-4 rounded-lg">
+                                <div class="text-3xl font-bold text-sky-400">$8.2M</div>
+                                <div class="text-sm text-slate-400">Annual OpEx</div>
+                            </div>
+                            <div class="bg-slate-800 p-4 rounded-lg">
+                                <div class="text-3xl font-bold text-sky-400">$12.5M</div>
+                                <div class="text-sm text-slate-400">5-Year CapEx</div>
+                            </div>
+                            <div class="bg-slate-800 p-4 rounded-lg">
+                                <div class="text-3xl font-bold text-green-400">92%</div>
+                                <div class="text-sm text-slate-400">Plan Confidence</div>
+                            </div>
+                            <div class="bg-slate-800 p-4 rounded-lg">
+                                <div class="text-3xl font-bold text-green-400">3.2</div>
+                                <div class="text-sm text-slate-400">Asset Health Index</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statutory Compliance Section -->
+    <section id="compliance" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-block bg-red-100 text-red-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                    10-35% Compliance Gap in Typical Facilities
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4 font-serif">Statutory Compliance Assurance</h2>
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto">Systematic gap analysis and remediation to achieve 100% regulatory compliance</p>
+            </div>
+
+            <!-- Process Flow -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold text-slate-900 mb-8 text-center">7-Step Audit Methodology</h3>
+                <div class="grid md:grid-cols-4 lg:grid-cols-7 gap-4">
+                    <div class="bg-gradient-to-br from-sky-500 to-blue-600 p-6 rounded-xl text-white text-center">
+                        <div class="text-3xl font-bold mb-2">01</div>
+                        <div class="text-sm font-semibold">Transmit Data</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-sky-500 to-blue-600 p-6 rounded-xl text-white text-center">
+                        <div class="text-3xl font-bold mb-2">02</div>
+                        <div class="text-sm font-semibold">Validate Register</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-sky-500 to-blue-600 p-6 rounded-xl text-white text-center">
+                        <div class="text-3xl font-bold mb-2">03</div>
+                        <div class="text-sm font-semibold">Sentinel Import</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-sky-500 to-blue-600 p-6 rounded-xl text-white text-center">
+                        <div class="text-3xl font-bold mb-2">04</div>
+                        <div class="text-sm font-semibold">Classify & Map</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-sky-500 to-blue-600 p-6 rounded-xl text-white text-center">
+                        <div class="text-3xl font-bold mb-2">05</div>
+                        <div class="text-sm font-semibold">Analysis</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-sky-500 to-blue-600 p-6 rounded-xl text-white text-center">
+                        <div class="text-3xl font-bold mb-2">06</div>
+                        <div class="text-sm font-semibold">Close Gaps</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-500 to-emerald-600 p-6 rounded-xl text-white text-center">
+                        <div class="text-3xl font-bold mb-2">07</div>
+                        <div class="text-sm font-semibold">System Load-Up</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Framework Diagram -->
+            <div class="bg-slate-50 rounded-2xl p-8 md:p-12">
+                <h3 class="text-2xl font-bold text-slate-900 mb-8 text-center">Compliance Framework Hierarchy</h3>
+                <div class="max-w-3xl mx-auto">
+                    <div class="space-y-4">
+                        <div class="bg-red-100 border-l-4 border-red-600 p-6 rounded-r-xl">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="text-sm font-bold text-red-600 uppercase">Level 1 - Mandatory</div>
+                                    <div class="text-xl font-bold text-slate-900 mt-1">Legislation</div>
+                                    <div class="text-sm text-slate-600 mt-1">Commonwealth & State Acts (WHS Act, BCA, etc.)</div>
+                                </div>
+                                <div class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold">Enforceable</div>
+                            </div>
+                        </div>
+                        <div class="ml-8 bg-orange-100 border-l-4 border-orange-600 p-6 rounded-r-xl">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="text-sm font-bold text-orange-600 uppercase">Level 2 - Mandatory</div>
+                                    <div class="text-xl font-bold text-slate-900 mt-1">Regulations</div>
+                                    <div class="text-sm text-slate-600 mt-1">Implementation requirements under legislation</div>
+                                </div>
+                                <div class="bg-orange-600 text-white px-4 py-2 rounded-lg font-bold">Binding</div>
+                            </div>
+                        </div>
+                        <div class="ml-16 bg-blue-100 border-l-4 border-blue-600 p-6 rounded-r-xl">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="text-sm font-bold text-blue-600 uppercase">Level 3 - Technical Specification</div>
+                                    <div class="text-xl font-bold text-slate-900 mt-1">Standards</div>
+                                    <div class="text-sm text-slate-600 mt-1">AS/NZS Standards providing technical detail</div>
+                                </div>
+                                <div class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold">Reference</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Capital Works Dashboard -->
+    <section id="engineering" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4 font-serif">Transparency in Capital Delivery</h2>
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto">Real-time visibility across your entire capital works program</p>
+            </div>
+
+            <!-- Dashboard Mockup -->
+            <div class="bg-white rounded-2xl shadow-2xl p-8">
+                <div class="flex items-center justify-between mb-8 pb-6 border-b border-slate-200">
+                    <h3 class="text-2xl font-bold text-slate-900">Capital Works Program</h3>
+                    <div class="flex items-center space-x-4">
+                        <button class="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg font-medium hover:bg-slate-200 transition-colors">Filter</button>
+                        <button class="px-4 py-2 bg-sky-500 text-white rounded-lg font-medium hover:bg-sky-600 transition-colors">Export Report</button>
+                    </div>
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-gradient-to-br from-blue-50 to-sky-50 p-6 rounded-xl border border-blue-200">
+                        <div class="text-sm text-slate-600 mb-1">Total Budget</div>
+                        <div class="text-3xl font-bold text-slate-900">$8.4M</div>
+                        <div class="text-xs text-green-600 mt-2">↑ 12% vs Last FY</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border border-green-200">
+                        <div class="text-sm text-slate-600 mb-1">Committed</div>
+                        <div class="text-3xl font-bold text-slate-900">$6.2M</div>
+                        <div class="text-xs text-slate-500 mt-2">74% of budget</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-xl border border-orange-200">
+                        <div class="text-sm text-slate-600 mb-1">Active Projects</div>
+                        <div class="text-3xl font-bold text-slate-900">12</div>
+                        <div class="text-xs text-slate-500 mt-2">3 in tender</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl border border-purple-200">
+                        <div class="text-sm text-slate-600 mb-1">Completion Rate</div>
+                        <div class="text-3xl font-bold text-slate-900">89%</div>
+                        <div class="text-xs text-green-600 mt-2">On-time delivery</div>
+                    </div>
+                </div>
+
+                <!-- Project List -->
+                <div class="space-y-4">
+                    <!-- Project 1 -->
+                    <div class="border border-slate-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <h4 class="text-lg font-bold text-slate-900">HVAC Chiller Replacement - Building A</h4>
+                                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold">IN PROGRESS</span>
+                                </div>
+                                <div class="text-sm text-slate-600">Project ID: CAP-2025-001 | Manager: Sarah Chen</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-2xl font-bold text-slate-900">$1.2M</div>
+                                <div class="text-sm text-slate-600">Budget</div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <div class="text-xs text-slate-600 mb-1">Spend to Date</div>
+                                <div class="text-lg font-bold text-slate-900">$840K</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-600 mb-1">Remaining</div>
+                                <div class="text-lg font-bold text-green-600">$360K</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-600 mb-1">Target Completion</div>
+                                <div class="text-lg font-bold text-slate-900">Mar 2026</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-slate-600">Progress</span>
+                                <span class="font-semibold text-slate-900">70%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-3">
+                                <div class="bg-blue-600 h-3 rounded-full progress-bar" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="border border-slate-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <h4 class="text-lg font-bold text-slate-900">Fire Panel Upgrade - Campus Wide</h4>
+                                    <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-semibold">TENDER</span>
+                                </div>
+                                <div class="text-sm text-slate-600">Project ID: CAP-2025-007 | Manager: Michael Torres</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-2xl font-bold text-slate-900">$890K</div>
+                                <div class="text-sm text-slate-600">Budget</div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <div class="text-xs text-slate-600 mb-1">Spend to Date</div>
+                                <div class="text-lg font-bold text-slate-900">$45K</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-600 mb-1">Remaining</div>
+                                <div class="text-lg font-bold text-slate-900">$845K</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-600 mb-1">Target Completion</div>
+                                <div class="text-lg font-bold text-slate-900">Jun 2026</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-slate-600">Progress</span>
+                                <span class="font-semibold text-slate-900">15%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-3">
+                                <div class="bg-orange-600 h-3 rounded-full progress-bar" style="width: 15%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="border border-slate-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <h4 class="text-lg font-bold text-slate-900">Roof Replacement - Building C</h4>
+                                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">COMPLETED</span>
+                                </div>
+                                <div class="text-sm text-slate-600">Project ID: CAP-2025-003 | Manager: Emily Rodriguez</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-2xl font-bold text-slate-900">$675K</div>
+                                <div class="text-sm text-slate-600">Budget</div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <div class="text-xs text-slate-600 mb-1">Final Spend</div>
+                                <div class="text-lg font-bold text-slate-900">$658K</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-600 mb-1">Under Budget</div>
+                                <div class="text-lg font-bold text-green-600">$17K</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-600 mb-1">Completed</div>
+                                <div class="text-lg font-bold text-slate-900">Dec 2025</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-slate-600">Progress</span>
+                                <span class="font-semibold text-slate-900">100%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-3">
+                                <div class="bg-green-600 h-3 rounded-full progress-bar" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rapid AI Asset Identification -->
+    <section id="digital" class="py-24 bg-slate-950 carbon-fiber text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="inline-block bg-sky-500/20 text-sky-400 px-4 py-2 rounded-full text-sm font-semibold mb-4 border border-sky-500/30">
+                    AI-Powered Technology
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 font-serif">Rapid AI Asset Identification</h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">Transform site imagery into structured asset data in under 5 minutes</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- Features List -->
+                <div class="space-y-6">
+                    <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6 hover:border-sky-500/50 transition-colors">
+                        <div class="flex items-start">
+                            <div class="bg-sky-500/20 p-3 rounded-lg mr-4">
+                                <svg class="w-6 h-6 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Prompt-Based Creation</h3>
+                                <p class="text-slate-400">Natural language commands to detect any asset type: "Fire Extinguisher", "Exit Sign", "Concrete Spalling"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6 hover:border-sky-500/50 transition-colors">
+                        <div class="flex items-start">
+                            <div class="bg-sky-500/20 p-3 rounded-lg mr-4">
+                                <svg class="w-6 h-6 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Automated Annotation (SAM3)</h3>
+                                <p class="text-slate-400">Segment Anything Model 3 provides pixel-perfect bounding boxes with confidence scores</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6 hover:border-sky-500/50 transition-colors">
+                        <div class="flex items-start">
+                            <div class="bg-sky-500/20 p-3 rounded-lg mr-4">
+                                <svg class="w-6 h-6 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Speed: Under 5 Minutes</h3>
+                                <p class="text-slate-400">Process hundreds of images and generate structured asset registers in minutes, not weeks</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6 hover:border-sky-500/50 transition-colors">
+                        <div class="flex items-start">
+                            <div class="bg-sky-500/20 p-3 rounded-lg mr-4">
+                                <svg class="w-6 h-6 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">API Endpoint</h3>
+                                <p class="text-slate-400">Integrate directly into your workflows with RESTful API access</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6 hover:border-sky-500/50 transition-colors">
+                        <div class="flex items-start">
+                            <div class="bg-sky-500/20 p-3 rounded-lg mr-4">
+                                <svg class="w-6 h-6 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Customization</h3>
+                                <p class="text-slate-400">Train on your specific asset types and organizational taxonomy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Demo -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-bold">Live AI Detection</h3>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                            <span class="text-sm text-slate-400">Active</span>
+                        </div>
+                    </div>
+
+                    <!-- Status Bar -->
+                    <div class="bg-slate-800 rounded-lg p-4 mb-4">
+                        <div class="text-sm text-slate-400 mb-2">Status:</div>
+                        <div id="ai-status" class="text-sky-400 font-mono">Initializing...</div>
+                    </div>
+
+                    <!-- Prompt Display -->
+                    <div class="bg-slate-800 rounded-lg p-4 mb-4">
+                        <div class="text-sm text-slate-400 mb-2">Prompt:</div>
+                        <div id="ai-prompt" class="text-white font-mono">Detect "<span id="prompt-text"></span>"</div>
+                    </div>
+
+                    <!-- Image Container -->
+                    <div class="relative bg-slate-800 rounded-lg overflow-hidden mb-4" style="height: 300px;" id="image-container">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-slate-600">Loading image...</div>
+                        </div>
+                    </div>
+
+                    <!-- Console Log -->
+                    <div class="bg-slate-800 rounded-lg p-4 font-mono text-xs">
+                        <div class="text-slate-400 mb-2">Console Output:</div>
+                        <div id="console-output" class="text-green-400 space-y-1 max-h-32 overflow-y-auto">
+                            <div>> System initialized</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <!-- Company -->
+                <div>
+                    <div class="text-2xl font-bold text-gradient mb-4">SENTINEL</div>
+                    <p class="text-slate-400 text-sm mb-4">Engineering Strategy. Powered by AI.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-slate-400 hover:text-sky-400 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-sky-400 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-sky-400 transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Services</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#advisory" class="hover:text-white transition-colors">Strategic Advisory</a></li>
+                        <li><a href="#engineering" class="hover:text-white transition-colors">Capital Works</a></li>
+                        <li><a href="#digital" class="hover:text-white transition-colors">Digital Twin & AI</a></li>
+                        <li><a href="#compliance" class="hover:text-white transition-colors">Compliance Assurance</a></li>
+                        <li><a href="#methodology" class="hover:text-white transition-colors">Asset Management Planning</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-slate-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Case Studies</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Team</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Partners</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Contact</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                            <span>1300 SENTINEL</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <span>contact@sentinelasset.com.au</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>Perth, Western Australia</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-sm text-slate-400 mb-4 md:mb-0">
+                        © 2025 Sentinel Asset Management. All rights reserved.
+                    </div>
+                    <div class="flex space-x-6 text-sm text-slate-400">
+                        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                        <a href="#" class="hover:text-white transition-colors">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Glassmorphic navbar on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.9)';
+                navbar.style.backdropFilter = 'blur(20px)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.1)';
+                navbar.style.backdropFilter = 'blur(10px)';
+            }
+        });
+
+        // AI Demo Simulation
+        const scenarios = [
+            {
+                name: 'Fire Extinguisher',
+                filename: 'facility_scan_001.jpg',
+                color: '#ef4444',
+                bbox: { top: '30%', left: '25%', width: '20%', height: '35%' },
+                confidence: 94.2
+            },
+            {
+                name: 'Exit Sign',
+                filename: 'facility_scan_045.jpg',
+                color: '#22c55e',
+                bbox: { top: '15%', left: '40%', width: '25%', height: '20%' },
+                confidence: 97.8
+            },
+            {
+                name: 'Concrete Spalling',
+                filename: 'facility_scan_089.jpg',
+                color: '#f59e0b',
+                bbox: { top: '40%', left: '30%', width: '35%', height: '30%' },
+                confidence: 88.5
+            }
+        ];
+
+        let currentScenario = 0;
+        let typingIndex = 0;
+        let isTyping = false;
+
+        function addConsoleLog(message) {
+            const consoleOutput = document.getElementById('console-output');
+            const logEntry = document.createElement('div');
+            logEntry.textContent = `> ${message}`;
+            consoleOutput.appendChild(logEntry);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        function typePrompt(text, callback) {
+            const promptText = document.getElementById('prompt-text');
+            promptText.textContent = '';
+            typingIndex = 0;
+            isTyping = true;
+
+            const typeInterval = setInterval(() => {
+                if (typingIndex < text.length) {
+                    promptText.textContent += text[typingIndex];
+                    typingIndex++;
+                } else {
+                    clearInterval(typeInterval);
+                    isTyping = false;
+                    if (callback) callback();
+                }
+            }, 50);
+        }
+
+        function runScenario(index) {
+            const scenario = scenarios[index];
+            const statusDiv = document.getElementById('ai-status');
+            const imageContainer = document.getElementById('image-container');
+
+            // Clear previous content
+            imageContainer.innerHTML = '';
+
+            // Status: Uploading
+            statusDiv.textContent = `Uploading ${scenario.filename}...`;
+            addConsoleLog(`Loading image: ${scenario.filename}`);
+
+            setTimeout(() => {
+                // Type the prompt
+                typePrompt(scenario.name, () => {
+                    statusDiv.textContent = 'Processing with AI vision model...';
+                    addConsoleLog(`Running detection for: ${scenario.name}`);
+
+                    setTimeout(() => {
+                        // Create image placeholder
+                        const imagePlaceholder = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                        imagePlaceholder.setAttribute('viewBox', '0 0 600 400');
+                        imagePlaceholder.setAttribute('class', 'w-full h-full');
+                        imagePlaceholder.innerHTML = `
+                            <rect width="600" height="400" fill="#1e293b"/>
+                            <g opacity="0.3">
+                                <line x1="0" y1="100" x2="600" y2="100" stroke="#475569" stroke-width="1"/>
+                                <line x1="0" y1="200" x2="600" y2="200" stroke="#475569" stroke-width="1"/>
+                                <line x1="0" y1="300" x2="600" y2="300" stroke="#475569" stroke-width="1"/>
+                                <line x1="150" y1="0" x2="150" y2="400" stroke="#475569" stroke-width="1"/>
+                                <line x1="300" y1="0" x2="300" y2="400" stroke="#475569" stroke-width="1"/>
+                                <line x1="450" y1="0" x2="450" y2="400" stroke="#475569" stroke-width="1"/>
+                            </g>
+                            <text x="300" y="200" font-size="20" fill="#64748b" text-anchor="middle">${scenario.filename}</text>
+                        `;
+                        imageContainer.appendChild(imagePlaceholder);
+
+                        // Add scanline
+                        const scanline = document.createElement('div');
+                        scanline.className = 'scanline';
+                        imageContainer.appendChild(scanline);
+
+                        statusDiv.textContent = 'Analyzing image...';
+                        addConsoleLog('SAM3 model inference started');
+
+                        setTimeout(() => {
+                            // Remove scanline
+                            scanline.remove();
+
+                            // Add bounding box
+                            const bbox = document.createElement('div');
+                            bbox.className = 'bounding-box';
+                            bbox.style.top = scenario.bbox.top;
+                            bbox.style.left = scenario.bbox.left;
+                            bbox.style.width = scenario.bbox.width;
+                            bbox.style.height = scenario.bbox.height;
+                            bbox.style.borderColor = scenario.color;
+                            bbox.style.boxShadow = `0 0 10px ${scenario.color}`;
+
+                            // Add confidence badge
+                            const badge = document.createElement('div');
+                            badge.className = 'confidence-badge';
+                            badge.style.backgroundColor = scenario.color;
+                            badge.textContent = `${scenario.name} (${scenario.confidence}%)`;
+                            bbox.appendChild(badge);
+
+                            imageContainer.appendChild(bbox);
+
+                            statusDiv.textContent = `Detection complete: ${scenario.name} identified`;
+                            addConsoleLog(`Object detected: ${scenario.name}`);
+                            addConsoleLog(`Confidence: ${scenario.confidence}%`);
+                            addConsoleLog(`Bounding box generated`);
+                            addConsoleLog('Ready for next detection');
+
+                            // Move to next scenario
+                            setTimeout(() => {
+                                currentScenario = (currentScenario + 1) % scenarios.length;
+                                runScenario(currentScenario);
+                            }, 4000);
+                        }, 3000);
+                    }, 1000);
+                });
+            }, 1000);
+        }
+
+        // Start the demo on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                runScenario(0);
+            }, 500);
+        });
+
+        // Fade in animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
